@@ -1,0 +1,43 @@
+# General Options
+#--update
+
+# Geo-restriction
+#--geo-bypass
+--geo-bypass-country IN
+
+# Download Options
+--external-downloader aria2c --external-downloader-args -x 16
+
+# Filesystem Options
+-P "D:\Downloads\yt-dlp"
+--cache-dir "D:\Downloads\yt-dlp\!cache"
+-o "%(title)s (%(height)sp WEB-DL %(vcodec)s %(acodec)s).%(ext)s"
+--windows-filenames
+--no-overwrites
+--no-write-description
+--continue
+
+# Verbosity and Simulation Options
+#--quiet
+--newline
+--progress
+
+# Video Format Options
+# -S +vcodec:av01,+acodec:flac,dts,eac3,opus,
+# -f "(bv*[vcodec~='^((he|a)vc|h26[45])']+ba) / (bv*+ba/b)"
+--merge-output-format mkv
+
+# Subtitle Options
+--write-automatic-subs 
+
+# Post-Processing Options
+--embed-subs
+--convert-subs srt
+--embed-thumbnail
+--convert-thumbnails jpg
+--embed-metadata
+--embed-chapters
+--ffmpeg-location "C:\PortableApps\PATH\FFmpeg-Build-yt-dlp"
+
+# SponsorBlock Options
+--sponsorblock-mark all
