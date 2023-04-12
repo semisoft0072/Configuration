@@ -14,6 +14,9 @@ if (-not $IsAdmin) {
     exit
 }
 
+# Enabling Developer Mode
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /T REG_DWORD /F /V "AllowDevelopmentWithoutDevLicense" /D "1"
+
 # Title
 $Host.UI.RawUI.WindowTitle = "Winget-Install"
 
@@ -24,8 +27,8 @@ Write-Host "===========================================" -ForegroundColor DarkGr
 "`n"
 Read-Host -Prompt "Are You Sure!"
 
-# Updating Source/Bucket Winget, Scoop
-Write-Host "| Updating/Adding Source/Bucket Winget, Scoop |" -ForegroundColor Yellow `n
+# Updating Source Winget
+Write-Host "| Updating Source Winget |" -ForegroundColor Yellow `n
 winget source update
 "`n"
 
@@ -63,6 +66,7 @@ $WingetList = @(
     "XP8C9QZMS2PC1T", # Brave Browser
     "XP9KHM4BK9FZ7Q", # Visual Studio Code
     "XP89DCGQ3K6VLD",  # Microsoft PowerToys
+    "9NBLGGH5R558", # Microsoft To Do: Lists, Tasks & Reminders
 
     # Apps
     "Bitwarden.Bitwarden", # Bitwarden
@@ -73,6 +77,7 @@ $WingetList = @(
     "EpicGames.EpicGamesLauncher", # Epic Games Launcher
     "Ferdium.Ferdium", # Ferdium
     "Google.Drive", # Google Drive for desktop
+    "GitHub.GitHubDesktop", # GitHub Desktop
     "JetBrains.Toolbox", # JetBrains Toolbox
     "Henry++.simplewall", # simplewall
     "M2Team.NanaZip", # NanaZip
@@ -88,7 +93,7 @@ $WingetList = @(
     "Sandboxie.Plus", # Sandboxie-Plus
     "Telegram.TelegramDesktop", # Telegram Desktop
     "Valve.Steam", # Steam
-    "voidtools.Everything", # Everything
+    "voidtools.Everything" # Everything
     #"RiotGames.Valorant.EU" # Valorant - EU
 )
 
@@ -131,11 +136,24 @@ Write-Host "| Updating App if found |" -ForegroundColor Yellow
 winget upgrade --all
 "`n"
 
-# Installing MPC Video Renderer
-Write-Host "| Installing MPC Video Renderer |" -ForegroundColor Yellow
+# Adding missing shortcut to desktop
+Write-Host "| Creating shortcuts |" -ForegroundColor Yellow
+# simplewall
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\simplewall.lnk")
+$Shortcut.TargetPath = "C:\Program Files\simplewall\simplewall.exe"
+$Shortcut.WorkingDirectory = "C:\Program Files\simplewall"
+$Shortcut.Save()
+Write-Host "- simplewall shortcut created successfully."
 
-iwr "https://api.github.com/repos/Aleksoid1978/VideoRenderer/releases/latest" -UseBasicParsing | ConvertFrom-Json | % { iwr $_.assets[0].browser_download_url -OutFile "C:\Windows\Temp\VideoRenderer-latest.zip"; Expand-Archive "C:\Windows\Temp\VideoRenderer-latest.zip" -DestinationPath "C:\Program Files\MPC-HC\MPC Video Renderer" -Force; Start-Process -FilePath "C:\Program Files\MPC-HC\MPC Video Renderer\Install_MPCVR_64.cmd" -WindowStyle Hidden; ri "C:\Windows\Temp\VideoRenderer-latest.zip" }
-"`n"
+# Adding missing apps to Startup
+Write-Host "| Adding missing apps to Startup |" -ForegroundColor Yellow
+# simplewall
+Copy-Item -Path "$Home\Desktop\simplewall.lnk" -Destination "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+Write-Host "- simplewall successfully added to Startup."
+# Fan Control
+Copy-Item -Path "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\FanControl.lnk" -Destination "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+Write-Host "- Fan Control successfully added to Startup."
 
 Write-Host "`nDone." -ForegroundColor Green
 Read-Host -Prompt "Press any key to Exit"

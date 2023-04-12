@@ -35,9 +35,10 @@ $ScoopUserList = @(
     
     # Apps
     "adb", # Android SDK platform-tools
-    "ariang-native", # AriaNg Native
+    "aria2", # Aria2
+    #"ariang-native", # AriaNg Native
+    "fancontrol", # Fan Control
     "ffmpeg-nightly", # FFmpeg Master BtbN builds
-    "ffmpeg-yt-dlp", # FFmpeg Master yt-dlp builds
     "freac", # fre:ac - free audio converter
     "freetube", # FreeTube
     "gpac", # MP4Box
@@ -56,7 +57,6 @@ $ScoopUserList = @(
     "staxrip", # Staxrip
     "subtitleedit", # Subtitle Edit
     "tor-browser", # Tor Browser
-    "wget", # Wget2
     "winmerge" # WinMerge
 )
 ForEach ($UserAppID in $ScoopUserList) {
