@@ -136,24 +136,5 @@ Write-Host "| Updating App if found |" -ForegroundColor Yellow
 winget upgrade --all
 "`n"
 
-# Adding missing shortcut to desktop
-Write-Host "| Creating shortcuts |" -ForegroundColor Yellow
-# simplewall
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$Home\Desktop\simplewall.lnk")
-$Shortcut.TargetPath = "C:\Program Files\simplewall\simplewall.exe"
-$Shortcut.WorkingDirectory = "C:\Program Files\simplewall"
-$Shortcut.Save()
-Write-Host "- simplewall shortcut created successfully."
-
-# Adding missing apps to Startup
-Write-Host "| Adding missing apps to Startup |" -ForegroundColor Yellow
-# simplewall
-Copy-Item -Path "$Home\Desktop\simplewall.lnk" -Destination "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-Write-Host "- simplewall successfully added to Startup."
-# Fan Control
-Copy-Item -Path "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\FanControl.lnk" -Destination "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-Write-Host "- Fan Control successfully added to Startup."
-
 Write-Host "`nDone." -ForegroundColor Green
 Read-Host -Prompt "Press any key to Exit"
