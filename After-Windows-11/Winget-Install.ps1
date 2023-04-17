@@ -15,7 +15,7 @@ if (-not $IsAdmin) {
 }
 
 # Enabling Developer Mode
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /T REG_DWORD /F /V "AllowDevelopmentWithoutDevLicense" /D "1"
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /T REG_DWORD /F /V "AllowDevelopmentWithoutDevLicense" /D "1"
 
 # Title
 $Host.UI.RawUI.WindowTitle = "Winget-Install"
@@ -66,7 +66,7 @@ $WingetList = @(
     "XP8C9QZMS2PC1T", # Brave Browser
     "XP9KHM4BK9FZ7Q", # Visual Studio Code
     "XP89DCGQ3K6VLD",  # Microsoft PowerToys
-    "9NBLGGH5R558", # Microsoft To Do: Lists, Tasks & Reminders
+    #"9NBLGGH5R558", # Microsoft To Do: Lists, Tasks & Reminders
 
     # Apps
     "Bitwarden.Bitwarden", # Bitwarden
@@ -75,7 +75,7 @@ $WingetList = @(
     "Discord.Discord", # Discord
     "DominikReichl.KeePass", # KeePass Password Safe
     "EpicGames.EpicGamesLauncher", # Epic Games Launcher
-    "Ferdium.Ferdium", # Ferdium
+    #"Ferdium.Ferdium", # Ferdium
     "Google.Drive", # Google Drive for desktop
     "GitHub.GitHubDesktop", # GitHub Desktop
     "JetBrains.Toolbox", # JetBrains Toolbox
@@ -83,14 +83,14 @@ $WingetList = @(
     "M2Team.NanaZip", # NanaZip
     "namazso.OpenHashTab", # OpenHashTab
     "Nextcloud.NextcloudDesktop", # Nextcloud
-    "nomacs.nomacs", # nomacs - Image Lounge
+    #"nomacs.nomacs", # nomacs - Image Lounge
     "Notion.Notion", # Notion
     "Obsidian.Obsidian", # Obsidian
-    "OBSProject.OBSStudio" # OBS Studio
+    #"OBSProject.OBSStudio" # OBS Studio
     "Oracle.VirtualBox", # Oracle VM VirtualBox
     "ProtonTechnologies.ProtonVPN", # ProtonVPN
     "qBittorrent.qBittorrent", # qBittorrent
-    "Sandboxie.Plus", # Sandboxie-Plus
+    #"Sandboxie.Plus", # Sandboxie-Plus
     "Telegram.TelegramDesktop", # Telegram Desktop
     "Valve.Steam", # Steam
     "voidtools.Everything" # Everything

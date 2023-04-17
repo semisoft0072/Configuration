@@ -42,7 +42,7 @@ $ScoopUserList = @(
     "freac", # fre:ac - free audio converter
     "freetube", # FreeTube
     "gpac", # MP4Box
-    "hakuneko", # HakuNeko Desktop
+    #"hakuneko", # HakuNeko Desktop
     "MakeMKV", # MakeMKV
     "mediainfo", # MediaInfo-CLI
     "mediainfo-gui", # MediaInfo-GUI
@@ -52,7 +52,7 @@ $ScoopUserList = @(
     "picocrypt", # Picocrypt
     "qaac", # CLI QuickTime AAC/ALAC encoder
     "rclone" # Rclone
-    "rclone-browser", # RcloneBrowser
+    #"rclone-browser", # RcloneBrowser
     "sox", # SoX - Sound eXchange
     "staxrip", # Staxrip
     "subtitleedit", # Subtitle Edit

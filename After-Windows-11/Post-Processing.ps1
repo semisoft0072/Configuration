@@ -52,9 +52,12 @@ $Shortcut.WorkingDirectory = "C:\Program Files\simplewall"
 $Shortcut.Save()
 Write-Host "- simplewall shortcut created successfully."
 
+# User folder location
+$UserFolder = [System.Environment]::GetFolderPath('UserProfile')
+
 # Adding missing apps to Startup
-$StartupPath = "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 Write-Host "| Adding missing apps to Startup |" -ForegroundColor Yellow
+$StartupPath = "$UserFolder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 # Check-for-updates.bat
 if (!(Test-Path C:\bin)) {
     New-Item -ItemType Directory -Path C:\bin | Out-Null
@@ -74,8 +77,23 @@ Write-Host "- Check-for-updates.bat successfully added to Startup."
 Copy-Item -Path "$Home\Desktop\simplewall.lnk" -Destination "$StartupPath"
 Write-Host "- simplewall successfully added to Startup."
 # Fan Control
-Copy-Item -Path "C:\Users\user\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\FanControl.lnk" -Destination "$StartupPath"
+Copy-Item -Path "$UserFolder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Scoop Apps\FanControl.lnk" -Destination "$StartupPath"
 Write-Host "- Fan Control successfully added to Startup."
 
 # Adding apps configs
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/After-Windows-11/configs/aria2.conf" -OutFile "C:\Users\user\.config\aria2.conf"
+Write-Host "| Importing Configs |" -ForegroundColor Yellow
+# aria2
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Apps/aria2.conf" -OutFile "$UserFolder\.config\aria2.conf"
+Write-Host "- aria2 config added successfully."
+# Fan-Control
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Apps/Fan-Control.json" -OutFile "$UserFolder\scoop\apps\fancontrol\current\Configurations\Fan-Control.json"
+Write-Host "- Fan-Control config added successfully."
+# mpc-hc
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Apps/mpc-hc.reg" -OutFile "$UserFolder\AppData\Local\Temp\mpc-hc.reg"; reg import "$UserFolder\AppData\Local\Temp\mpc-hc.reg"
+Write-Host "- mpc-hc config added successfully."
+# yt-dlp
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Apps/yt-dlp.conf" -OutFile "$UserFolder\AppData\Roaming\yt-dlp\config.txt"
+Write-Host "- yt-dlp config added successfully."
+# Windows-Terminal
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Apps/Windows-Terminal.json" -OutFile "$UserFolder\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Write-Host "- Windows-Terminal config added successfully."

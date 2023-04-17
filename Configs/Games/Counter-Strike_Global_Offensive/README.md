@@ -33,6 +33,6 @@ The video.txt file is optimized for the highest FPS performance and viability-fe
 </ol>
 
 ## Launch Options
-```ELM
+```
 -console -novid -refresh 144 -tickrate128
 ```
