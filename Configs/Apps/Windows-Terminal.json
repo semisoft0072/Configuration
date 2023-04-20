@@ -29,24 +29,36 @@
             "keys": "alt+shift+d"
         }
     ],
-    "alwaysShowNotificationIcon": false,
+    "alwaysShowNotificationIcon": true,
+    "autoHideWindow": false,
+    "centerOnLaunch": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "initialCols": 190,
+    "initialPosition": ",",
+    "initialRows": 42,
+    "launchMode": "focus",
+    "minimizeToNotificationArea": false,
     "profiles": 
     {
         "defaults": 
         {
             "adjustIndistinguishableColors": "always",
-            "colorScheme": "nord",
+            "antialiasingMode": "grayscale",
+            "colorScheme": "Campbell",
+            "experimental.retroTerminalEffect": false,
             "font": 
             {
-                "face": "JetBrains Mono",
+                "face": "Roboto Mono",
                 "size": 13.0,
                 "weight": "normal"
             },
-            "opacity": 100,
-            "useAcrylic": false,
+            "intenseTextStyle": "all",
+            "opacity": 75,
+            "padding": "8",
+            "scrollbarState": "hidden",
+            "useAcrylic": true,
             "useAtlasEngine": false
         },
         "list": 
@@ -358,5 +370,8 @@
             "yellow": "#EBCB8B"
         }
     ],
-    "themes": []
+    "tabWidthMode": "titleLength",
+    "theme": "dark",
+    "themes": [],
+    "useAcrylicInTabRow": true
 }

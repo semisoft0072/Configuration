@@ -14,13 +14,11 @@ if (-not $IsAdmin) {
 
 # Title
 $Host.UI.RawUI.WindowTitle = "BulkUninstall"
-
-Write-Host "===========================================" -ForegroundColor DarkGray
-Write-Host "Uninstalling Preinstall Apps"                -ForegroundColor Red
-Write-Host "Note      : This is my personal preference." -ForegroundColor Yellow
-Write-Host "===========================================" -ForegroundColor DarkGray
+Write-Host "=========================================" -ForegroundColor DarkGray
+Write-Host "Uninstalling Preinstall Apps using winget" -ForegroundColor Red
+Write-Host "Note: This is my personal preference."     -ForegroundColor Yellow
+Write-Host "=========================================" -ForegroundColor DarkGray
 "`n"
-
 Read-Host -Prompt "Are You Sure!!!"
 
 # Define apps to remove
@@ -31,22 +29,21 @@ $List = @(
     "Microsoft.GamingApp_8wekyb3d8bbwe", # Xbox
     "Microsoft.GetHelp_8wekyb3d8bbwe", # Get Help
     "Microsoft.Getstarted_8wekyb3d8bbwe", # Microsoft Tips
-    #"Microsoft.HEIFImageExtension_8wekyb3d8bbwe", # HEIF Image Extensions
+    "Microsoft.HEIFImageExtension_8wekyb3d8bbwe", # HEIF Image Extensions
     "Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe", # Office
-    "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe", # Microsoft Solitaire Collection
     "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe", # Solitaire & Casual Games
     "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe", # Microsoft Sticky Notes
     "Microsoft.OneDrive", # Microsoft OneDrive
     "Microsoft.People_8wekyb3d8bbwe", # Microsoft People
     "Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe", # Power Automate
-    #"Microsoft.RawImageExtension_8wekyb3d8bbwe", # Raw Image Extension
-    #"Microsoft.Todos_8wekyb3d8bbwe", # Microsoft To Do
+    "Microsoft.RawImageExtension_8wekyb3d8bbwe", # Raw Image Extension
+    "Microsoft.Todos_8wekyb3d8bbwe", # Microsoft To Do
     "Microsoft.VP9VideoExtensions_8wekyb3d8bbwe" # VP9 Video Extensions
     "Microsoft.WebMediaExtensions_8wekyb3d8bbwe" # Web Media Extensions
-    #"Microsoft.WebpImageExtension_8wekyb3d8bbwe" # Webp Image Extensions
-    #"Microsoft.Windows.Photos_8wekyb3d8bbwe" # Microsoft Photos
+    "Microsoft.WebpImageExtension_8wekyb3d8bbwe" # Webp Image Extensions
+    "Microsoft.Windows.Photos_8wekyb3d8bbwe" # Microsoft Photos
     "Microsoft.WindowsCamera_8wekyb3d8bbwe", # Windows Camera
-    #"microsoft.windowscommunicationsapps_8wekyb3d8bbwe", # Mail and Calendar
+    "microsoft.windowscommunicationsapps_8wekyb3d8bbwe", # Mail and Calendar
     "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe", # Feedback Hub
     "Microsoft.WindowsMaps_8wekyb3d8bbwe", # Windows Maps
     "Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe", # Windows Voice Recorder
@@ -66,10 +63,10 @@ $List = @(
 
 # Remove each app
 ForEach ($AppID in $List) {
-    Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
-    Write-Host "winget uninstall --id $AppID -e" -ForegroundColor Gray
-    Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
-    winget uninstall --id $AppID -e
+    Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
+    Write-Host "winget uninstall --id $AppID -e"                                     -ForegroundColor Gray
+    Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
+    winget uninstall --id $AppID -e --accept-source-agreements --accept-package-agreements
     "`n"
 }
 
