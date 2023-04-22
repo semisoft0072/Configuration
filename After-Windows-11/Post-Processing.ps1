@@ -1,52 +1,234 @@
 <#
-Adding/Fixing after apps installation processing done
-Place the "#" char before function if you don't want to run it
+.SYNOPSIS
+    Adding/Fixing for lazy person.
+.DESCRIPTION
+    Importing config and changing windows settings.
+.NOTES
+    This is my personal preference. so be sure to change before run this script.
+    Place the "#" char before function if you don't want to run it
+    Tested on 'Windows 11'
+.LINK
+    https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
+    https://www.elevenforum.com/
+    https://github.com/TairikuOokami/Windows/
+    https://gist.github.com/rad1ke/d8c4121931633eca04ca625d09ff1a11
 #>
 
 # Check if the script is running as administrator
 $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if (-not $IsAdmin) {
-
 # Restart the script with administrator privileges
     Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$($MyInvocation.InvocationName)`"" -Verb RunAs
     exit
 }
 
+$ProgressPreference = "SilentlyContinue"
+
 # Title
 $Host.UI.RawUI.WindowTitle = "Post-Processing"
-Write-Host "=====================================" -ForegroundColor DarkGray
-Write-Host "Adding/Fixing"                         -ForegroundColor Red
-Write-Host "Note: This is my personal preference." -ForegroundColor Yellow
-Write-Host "=====================================" -ForegroundColor DarkGray
-"`n"
-Read-Host -Prompt "Are You Sure!"
+Write-Host "This is my personal preference. so be sure to change before run this script." -ForegroundColor Red
+Read-Host -Prompt "Press any key to start"
 
-# Enabling Developer Mode
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
-Write-Host "Developer Mode 'On'"
+# * System Settings
+Write-Host "Changing System Settings..." -ForegroundColor Yellow
+# Power mode
+Write-Output "Changing power modes to 'Ultimate Performance'"
+powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61
+# Nearby sharing
+New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "CdpSessionUserAuthzPolicy" -Value "1" -PropertyType Dword -Force | Out-Null | Out-Null
+New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "NearShareChannelUserAuthzPolicy" -Value "0" -PropertyType Dword -Force | Out-Null | Out-Null
+# ! Neec to Look after sign out
+New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "RomeSdkChannelUserAuthzPolicy" -Value "1" -PropertyType Dword -Force | Out-Null | Out-Null
+# Clipboard
+New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Clipboard" -Name "EnableClipboardHistory" -Value "0" -PropertyType Dword -Force | Out-Null 
+Write-Output "Clipboard history 'Off'"
 "`n"
 
-# Stop F1 Key from Opening Help (Bing)
-reg add "HKEY_CURRENT_USER\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32" /ve /t REG_SZ /d "" /f > NUL 2>&1
-reg add "HKEY_CURRENT_USER\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64" /ve /t REG_SZ /d "" /f > NUL 2>&1
-Write-Host "Disabling 'F1' Key from Opening Help"
+# * Bluetooth & devices
+Write-Host "Changing Bluetooth & devices Settings..." -ForegroundColor Yellow
+# Disable Bluetooth
+# ! hmm not working is setting but work for admin user
+Disable-NetAdapter -Name "Bluetooth Network Connection" -Confirm:$false
+# Mouse
+New-ItemProperty -LiteralPath 'HKCU:\Control Panel\Mouse' -Name 'MouseSpeed' -Value '0' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Control Panel\Mouse' -Name 'MouseThreshold1' -Value '0' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Control Panel\Mouse' -Name 'MouseThreshold2' -Value '0' -PropertyType String -Force | Out-Null
+Write-Output "Enhance pointer precision 'Off'"
+New-ItemProperty -LiteralPath 'HKCU:\Control Panel\Mouse' -Name 'MouseSensitivity' -Value '6' -PropertyType String -Force | Out-Null
+Write-Output "Changing sensitivity to '6'"
 "`n"
 
+# * Network & Internet
+Write-Host "Changing Network & Internet Settings..." -ForegroundColor Yellow
+# Ethernet
+Set-NetConnectionProfile -Name "Network" -NetworkCategory Private
+Write-Output "Ethernet Network profile set to 'Private network'"
+"`n"
+
+# * Personalisation
+Write-Host "Changing Personalisation Settings..." -ForegroundColor Yellow
+# Accent colour
+New-ItemProperty -LiteralPath 'HKCU:\Control Panel\Desktop' -Name 'AutoColorization' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Accent colour set to 'Automatic'"
+# Start
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Start_Layout' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Start set to 'More Pin'"
+Remove-ItemProperty -LiteralPath 'HKCU:\Software\Policies\Microsoft\Windows\Explorer' -Name 'HideRecentlyAddedApps' -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer' -Name 'HideRecentlyAddedApps' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show recently added apps set to 'Off'"
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer' -Name 'NoRecentDocsHistory' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show recently opened items in Start, Jump Lists, and File Explorer set to 'Off'"
+# Taskbar Items
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search' -Name 'SearchOnTaskbarMode' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Search set to 'Hide'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Policies\Microsoft\Windows\Explorer' -Name 'HideTaskViewButton' -Value 1 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer' -Name 'HideTaskViewButton' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Task View set to 'Off'"
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests' -Name 'value' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Policies\Microsoft\Dsh' -Name 'AllowNewsAndInterests' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Widgets set to 'Off'"
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Chat' -Name 'ChatIcon' -Value 3 -PropertyType DWord -Force | Out-Null
+Write-Output "Chat set to 'Off'"
+# Taskbar behaviours
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'TaskbarAl' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Taskbar alignment set to 'Left'"
+"`n"
+
+# * Apps
+Write-Host "Changing Apps Settings..." -ForegroundColor Yellow
+# Advanced app settings
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP' -Name 'CdpSessionUserAuthzPolicy' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP' -Name 'RomeSdkChannelUserAuthzPolicy' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Share across devices set to 'Off'"
+"`n"
+
+# * Windows features
+Write-Host "Changing Windows features Settings..." -ForegroundColor Yellow
+Write-Output "Enabling 'Guarded Host'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "HostGuardian" -All | Out-Null
+Write-Output "Enabling 'Hyper-V'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "Microsoft-Hyper-V-All" -All | Out-Null
+Write-Output "Enabling 'Legacy Components'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "LegacyComponents" -All | Out-Null
+Write-Output "Enabling 'Microsoft Defender Application Guard'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "Windows-Defender-ApplicationGuard" -All | Out-Null
+Write-Output "Enabling 'Virtual Machine Platform'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "VirtualMachinePlatform" -All | Out-Null
+Write-Output "Enabling 'Windows Hypervisor Platfrom'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "HypervisorPlatform" -All | Out-Null
+Write-Output "Enabling 'Windows Sandbox'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "Containers-DisposableClientVM" -All | Out-Null
+Write-Output "Enabling 'Windows Subsystem for linux'"
+Enable-WindowsOptionalFeature -NoRestart -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All | Out-Null
+Write-Output "Disabling 'Windows Media Player'"
+Disable-WindowsOptionalFeature -NoRestart -Online -FeatureName "WindowsMediaPlayer" | Out-Null
+
+# * Time & Language
+# Typing
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Input\Settings' -Name 'EnableHwkbTextPrediction' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show text suggestions when typing on physical keyboard set to 'On'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Input\Settings' -Name 'MultilingualEnabled' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Multilingual text suggestions set to 'On'"
+
+# * Privacy & Security
+# For developers
+New-ItemProperty -LiteralPath 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock' -Name 'AllowDevelopmentWithoutDevLicense' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Developer Mode set to 'On'"
 # File Explorer
-Write-Host "File Explorer Settigs for devloper-friendly experience..." -ForegroundColor Yellow
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f > NUL 2>&1
-Write-Host "Show file extensions 'On'"
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f > NUL 2>&1
-Write-Host "Show hidden and system files 'On'"
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" /v FullPath /t REG_DWORD /d 1 /F > NUL 2>&1
-Write-Host "Show full path in title bar 'On'"
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideDrivesWithNoMedia /t REG_DWORD /d 0 /F > NUL 2>&1
-Write-Host "Show empty drives 'On'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'HideFileExt' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Show file extensions set to 'On'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Hidden' -Value 1 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'ShowSuperHidden' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show hidden and system files set to 'On'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState' -Name 'FullPath' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show full path in title bar set to 'On'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Policies\Microsoft\Windows\Explorer' -Name 'ShowRunAsDifferentUserInStart' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show Option to run as different user in start set to 'On'"
+New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'HideDrivesWithNoMedia' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Show empty drives set to 'On'"
+# General
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo' -Name 'Enabled' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo' -Name 'Value' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Let apps show me personalised ads by using my advertising ID set to 'Off'"
+New-ItemProperty -LiteralPath 'HKCU:\Control Panel\International\User Profile' -Name 'HttpAcceptLanguageOptOut' -Value 1 -PropertyType DWord -Force | Out-Null
+Write-Output "Let websites show me locally relevant content by accessing my language list set to 'Off'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'Start_TrackProgs' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Let Windows improve Start and search results by tracking app launches set to 'Off'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager' -Name 'SubscribedContent-338393Enabled' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager' -Name 'SubscribedContent-353694Enabled' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager' -Name 'SubscribedContent-353696Enabled' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Show me suggested content in the Settings app set to 'Off'"
+# Inking & typing personalisation
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\InkingAndTypingPersonalization' -Name 'Value' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Personalization\Settings' -Name 'AcceptedPrivacyPolicy' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\InputPersonalization' -Name 'RestrictImplicitInkCollection' -Value 1 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\InputPersonalization' -Name 'RestrictImplicitTextCollection' -Value 1 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\InputPersonalization\TrainedDataStore' -Name 'HarvestContacts' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Customised inking and typing dictionary set to 'Off'"
+# Search permissions
+New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings' -Name 'SafeSearchMode' -Value 2 -PropertyType DWord -Force | Out-Null
+Write-Output "SafeSearch set to 'Strict'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings' -Name 'IsAADCloudSearchEnabled' -Value 0 -PropertyType DWord -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings' -Name 'IsMSACloudSearchEnabled' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Cloud content search Microsoft account and Work or School account set to 'Off'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings' -Name 'IsDeviceSearchHistoryEnabled' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Search history on this device set to 'Off'"
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\SearchSettings' -Name 'IsDynamicSearchBoxEnabled' -Value 0 -PropertyType DWord -Force | Out-Null
+Write-Output "Show search highlight set to 'Off'"
+# Camera
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access your camera set to 'Off'"
+# Contacts
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access your contacts set to 'Off'"
+# Calendar
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access your calendar set to 'Off'"
+# Phone calls
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access your phone calls set to 'Off'"
+# Call history
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access your call history set to 'Off'"
+# Email
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access your email set to 'Off'"
+# Messaging
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps read messages set to 'Off'"
+# Radios
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps control device radios set to 'Off'"
+# Other devices
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Communicate with unpaired devices set to 'Off'"
+# App diagnostics
+New-ItemProperty -LiteralPath 'HKLM:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics' -Name 'Value' -Value 'Deny' -PropertyType String -Force | Out-Null
+Write-Output "Let apps access diagnostic info about your other apps set to 'Off'"
+"`n"
+
+# * Others
+# Stop F1 Key from Opening Help
+Write-Host "Disabling 'F1' Key from Opening Help"
+if((Test-Path -LiteralPath "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32") -ne $true) {  New-Item "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32" -force };
+if((Test-Path -LiteralPath "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64") -ne $true) {  New-Item "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64" -force };
+New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32' -Name '(default)' -Value '' -PropertyType String -Force | Out-Null
+New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64' -Name '(default)' -Value '' -PropertyType String -Force | Out-Null
+# TODO: More Staff add soon
 "`n"
 
 # Restarting File Explorer
 Write-Host "Restarting File Explorer..." -ForegroundColor Yellow
-Get-Process explorer | Stop-Process -Force
+Get-Process explorer | Stop-Process -Force | Out-Null
 "`n"
 
 # User folder location

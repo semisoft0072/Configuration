@@ -1,12 +1,19 @@
 <#
-Uninstalling Preinstall Apps From Windows 11
-Place the "#" char before function if you don't want to run it
+.SYNOPSIS
+    Bulk apps uninstaller for lazy person.
+.DESCRIPTION
+    Uninstalling Pre-installed apps using winget package manager.
+.NOTES
+    This is my personal preference. so be sure to change before run this script.
+    Place the "#" char before function if you don't want to run it
+    Tested on 'Windows 11'
+.LINK
+    https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
 #>
 
 # Check if the script is running as administrator
 $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if (-not $IsAdmin) {
-
 # Restart the script with administrator privileges
     Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$($MyInvocation.InvocationName)`"" -Verb RunAs
     exit
@@ -14,14 +21,10 @@ if (-not $IsAdmin) {
 
 # Title
 $Host.UI.RawUI.WindowTitle = "BulkUninstall"
-Write-Host "=========================================" -ForegroundColor DarkGray
-Write-Host "Uninstalling Preinstall Apps using winget" -ForegroundColor Red
-Write-Host "Note: This is my personal preference."     -ForegroundColor Yellow
-Write-Host "=========================================" -ForegroundColor DarkGray
-"`n"
-Read-Host -Prompt "Are You Sure!!!"
+Write-Host "This is my personal preference. so be sure to change before run this script." -ForegroundColor Red
+Read-Host -Prompt "Press any key to start"
 
-# Define apps to remove
+# Pre-installed apps list
 $List = @(
     "Clipchamp.Clipchamp_yxz26nhyzhsrt", # Clipchamp - Video Editor
     "Microsoft.549981C3F5F10_8wekyb3d8bbwe", # Cortana
@@ -60,13 +63,11 @@ $List = @(
     "MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy", # Windows Web Experience Pack
     "{462f63a8-6347-4894-a1b3-dbfe3a4c981d}" # Microsoft Visual C++ 2015 Redistributable (x86)
 )
-
-# Remove each app
 ForEach ($AppID in $List) {
     Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
     Write-Host "winget uninstall --id $AppID -e"                                     -ForegroundColor Gray
     Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
-    winget uninstall --id $AppID -e --accept-source-agreements --accept-package-agreements
+    winget uninstall --id $AppID -e --force --purge --accept-source-agreements --accept-package-agreements
     "`n"
 }
 
