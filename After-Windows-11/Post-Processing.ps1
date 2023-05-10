@@ -6,12 +6,14 @@
 .NOTES
     This is my personal preference. so be sure to change before run this script.
     Place the "#" char before function if you don't want to run it
-    Tested on 'Windows 11'
+    Tested on 'Windows 11 Enterprise'
 .LINK
     https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
     https://www.elevenforum.com/
     https://github.com/TairikuOokami/Windows/
     https://gist.github.com/rad1ke/d8c4121931633eca04ca625d09ff1a11
+    https://reg2ps.azurewebsites.net/
+    https://git.ameliorated.info/explore/repos
 #>
 
 # Check if the script is running as administrator
@@ -37,7 +39,7 @@ powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61
 # Nearby sharing
 New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "CdpSessionUserAuthzPolicy" -Value "1" -PropertyType Dword -Force | Out-Null | Out-Null
 New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "NearShareChannelUserAuthzPolicy" -Value "0" -PropertyType Dword -Force | Out-Null | Out-Null
-# ! Neec to Look after sign out
+# ! Need to Look after sign out
 New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Windows\CurrentVersion\CDP" -Name "RomeSdkChannelUserAuthzPolicy" -Value "1" -PropertyType Dword -Force | Out-Null | Out-Null
 # Clipboard
 New-ItemProperty -LiteralPath "HKCU:\Software\Microsoft\Clipboard" -Name "EnableClipboardHistory" -Value "0" -PropertyType Dword -Force | Out-Null 

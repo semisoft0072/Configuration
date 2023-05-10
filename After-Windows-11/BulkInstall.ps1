@@ -6,13 +6,13 @@
 .NOTES
     This is my personal preference. so be sure to change before run this script.
     Place the "#" char before function if you don't want to run it
-    Tested on 'Windows 11'
+    Tested on 'Windows 11 Enterprise'
 .LINK
     https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
 #>
 
 # Title
-$Host.UI.RawUI.WindowTitle = "BulkInstall-Windows11"
+$Host.UI.RawUI.WindowTitle = "BulkInstall"
 Write-Host "This is my personal preference. so be sure to change before run this script." -ForegroundColor Red
 Read-Host -Prompt "Press any key to start"
 
@@ -35,7 +35,7 @@ Write-Host "Adding Buckets..." -ForegroundColor Yellow `n
 scoop bucket add extras
 scoop bucket add versions
 scoop bucket add nerd-fonts
-# For missing apps from official buckets.
+scoop bucket add java
 scoop bucket add missing-apps https://github.com/semisoft0072/scoop-apps
 "`n"
 
@@ -43,31 +43,36 @@ scoop bucket add missing-apps https://github.com/semisoft0072/scoop-apps
 $WingetList = @(
     # Microsoft Store Apps
     "9PFHDD62MXS1", # Apple Music Preview
+    "9PJSDV0VPK04", # Bitwarden
     "XP8C9QZMS2PC1T", # Brave Browser
     "9PGCV4V3BK4W", # DevToys
+    "XPDC2RH70K22MN", # Discord
+    "XP99VR1BPSBQJ2", # Epic Games Launcher
+    "9WZDNCRFJ2WL", # Facebook
     "9WZDNCRF0083", # Facebook Messenger
+    "9NBLGGH5L9XT", # Instagram
     "XP89DCGQ3K6VLD", # Microsoft PowerToys
-    "9NBLGGH5R558", # Microsoft To Do: Lists, Tasks & Reminders
+    "9NBLGGH5R558", # Microsoft To Do
+    "9NVMNJCR03XV", # MSI Center
     "9N8G7TSCL18R", # NanaZip
     "9NF8H0H7WMLT", # NVIDIA Control Panel
-    "9NCBCSZSJRSB", # Spotify - Music and Podcasts
+    "9MZ1SNWT0N5D", # PowerShell
+    "9NRWMJP3717K", # Python 3.11
+    "9NS3RBQ5HV5F", # Reddit
+    "9NCBCSZSJRSB", # Spotify
+    "9WZDNCRFJ140", # Twitter
     "XP9KHM4BK9FZ7Q", # Visual Studio Code
     "9NKSQGP7F2NH", # WhatsApp
     "9MSVKQC78PK6", # WSL Debian
     # Apps , Dependency
-    "Bitwarden.Bitwarden", # Bitwarden
     "Cloudflare.Warp", # Cloudflare WARP
     "clsid2.mpc-hc", # MPC-HC
-    "Discord.Discord", # Discord
-    "DominikReichl.KeePass", # KeePass Password Safe
-    "EpicGames.EpicGamesLauncher", # Epic Games Launcher
     "GitHub.GitHubDesktop", # GitHub Desktop
     "Google.Drive", # Google Drive for desktop
     "Henry++.simplewall", # simplewall
     "JetBrains.Toolbox", # JetBrains Toolbox
     "Microsoft.DirectX" # DirectX End-User Runtime Web Installer
     "Microsoft.DotNet.DesktopRuntime.7", # Microsoft .NET Windows Desktop Runtime 7.0
-    "Microsoft.PowerShell", # PowerShell 7
     "Microsoft.VCRedist.2005.x64", # Microsoft Visual C++ 2005 Redistributable (x64)
     "Microsoft.VCRedist.2005.x86", # Microsoft Visual C++ 2005 Redistributable (x86)
     "Microsoft.VCRedist.2008.x64", # Microsoft Visual C++ 2008 Redistributable (x64)
@@ -87,7 +92,6 @@ $WingetList = @(
     "Obsidian.Obsidian", # Obsidian
     "Oracle.VirtualBox", # Oracle VM VirtualBox
     "ProtonTechnologies.ProtonVPN", # ProtonVPN
-    "Python.Python.3.11" # Python 3.11
     "qBittorrent.qBittorrent", # qBittorrent
     "Telegram.TelegramDesktop", # Telegram Desktop
     "Valve.Steam", # Steam
@@ -110,28 +114,35 @@ $ScoopList = @(
     # Apps
     "adb", # Android SDK platform-tools
     "aria2", # Aria2
+    "deew", # Dolby Encoding Engine Wrapper
+    "drivedlgo", #Drive-Dl-Go
     "fancontrol", # Fan Control
     "ffmpeg-nightly", # FFmpeg Master BtbN builds
     "freetube", # FreeTube
     "gMKVExtractGUI", # gMKVExtractGUI
     "gpac", # MP4Box
     "imageglass", # ImageGlass
+    "jdownloader", # JDownloader
+    "keepass" # KeePass Password Safe
     "MakeMKV", # MakeMKV
     "mediainfo", # MediaInfo-CLI
     "mediainfo-gui", # MediaInfo-GUI
     "MKVmergeBatcher", # MKVmergeBatcher
     "mkvtoolnix", # MKVToolNix
+    "mpc-hc-fork", # 
     "picocrypt", # Picocrypt
     "qaac", # CLI QuickTime AAC/ALAC encoder
     "rclone" # Rclone
+    "rclone-browser", # RcloneBrowser
     "sox", # SoX - Sound eXchange
     "staxrip", # Staxrip
     "subtitleedit", # Subtitle Edit
+    "temurin8-jre" # Java OpenJDK
     "tor-browser", # Tor Browser
-    "winmerge" # WinMerge
+    "winmerge", # WinMerge
+    "yt-dlp" # YT-DLP
     #"freac", # fre:ac - free audio converter
     #"hakuneko", # HakuNeko Desktop
-    #"rclone-browser", # RcloneBrowser
 )
 ForEach ($ScoopID in $ScoopList) {
     Write-Host "-----------------------------" -ForegroundColor DarkGray
@@ -152,10 +163,8 @@ python -m pip install --upgrade pip
 
 # Pip AppList
 $PipList = @(
-    "yt-dlp", # yt-dlp
-    "deew", # Dolby Encoding Engine Wrapper
-    "ffsubsync", # FFsubsync
     "tldr" # tldr-pages
+    #"ffsubsync", # FFsubsync
 )
 ForEach ($PipID in $PipList) {
     Write-Host "---------------------" -ForegroundColor DarkGray
@@ -191,7 +200,7 @@ $VSCEList = @(
 )
 ForEach ($VSCEID in $VSCEList) {
     Write-Host "--------------------------------------------------------------" -ForegroundColor DarkGray
-    Write-Host "code --install-extension $VSCEID"                               -ForegroundColor Gray
+    Write-Host "VSCode --install-extension $VSCEID"                             -ForegroundColor Gray
     Write-Host "--------------------------------------------------------------" -ForegroundColor DarkGray
     code --install-extension $VSCEID
     "`n"
@@ -199,10 +208,10 @@ ForEach ($VSCEID in $VSCEList) {
 
 # Updating All Apps if found / Check for potential problems and Cleaning Up
 Write-Host "Updating App if found / Check for potential problems and Cleaning Up..." -ForegroundColor Yellow
-winget upgrade --all
-scoop update *
+winget upgrade -i -r
+scoop update -k -q -a
 scoop checkup *
-scoop cleanup *
+scoop cleanup -a -k
 "`n"
 
 Write-Host "`nDone." -ForegroundColor Green

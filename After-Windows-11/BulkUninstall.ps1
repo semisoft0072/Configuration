@@ -6,7 +6,7 @@
 .NOTES
     This is my personal preference. so be sure to change before run this script.
     Place the "#" char before function if you don't want to run it
-    Tested on 'Windows 11'
+        Tested on 'Windows 11 Enterprise'
 .LINK
     https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
 #>
