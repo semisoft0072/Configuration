@@ -14,8 +14,8 @@ The `video.txt` file is optimal settings for the best performance and best graph
 
 ## Downloads
 
-- [autoexec.cfg]()
-- [video.txt]()
+- [autoexec.cfg](https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Games/CSGO/autoexec.cfg)
+- [video.txt](https://raw.githubusercontent.com/semisoft0072/Configuration/main/Configs/Games/CSGO/video.txt)
 
 ## Installation
 
