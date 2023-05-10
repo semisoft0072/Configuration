@@ -13,6 +13,8 @@ It is always better to use default settings when everything works for you. But i
 
 ## Quickstart
 
+> **Warning** Do not run this blindly.
+
 ## Windows
 
 Open a PowerShell terminal (version 5.1 or later) and run:
