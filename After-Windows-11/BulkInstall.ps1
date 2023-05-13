@@ -44,34 +44,27 @@ $WingetList = @(
     # Microsoft Store Apps
     "9PFHDD62MXS1", # Apple Music Preview
     "9PJSDV0VPK04", # Bitwarden
-    "XP8C9QZMS2PC1T", # Brave Browser
     "9PGCV4V3BK4W", # DevToys
     "XPDC2RH70K22MN", # Discord
     "XP99VR1BPSBQJ2", # Epic Games Launcher
-    "9WZDNCRFJ2WL", # Facebook
     "9WZDNCRF0083", # Facebook Messenger
-    "9NBLGGH5L9XT", # Instagram
     "XP89DCGQ3K6VLD", # Microsoft PowerToys
-    "9NBLGGH5R558", # Microsoft To Do
     "9NVMNJCR03XV", # MSI Center
     "9N8G7TSCL18R", # NanaZip
     "9NF8H0H7WMLT", # NVIDIA Control Panel
     "9MZ1SNWT0N5D", # PowerShell
     "9NRWMJP3717K", # Python 3.11
-    "9NS3RBQ5HV5F", # Reddit
     "9NCBCSZSJRSB", # Spotify
-    "9WZDNCRFJ140", # Twitter
     "XP9KHM4BK9FZ7Q", # Visual Studio Code
     "9NKSQGP7F2NH", # WhatsApp
     "9MSVKQC78PK6", # WSL Debian
     # Apps , Dependency
     "Cloudflare.Warp", # Cloudflare WARP
-    "clsid2.mpc-hc", # MPC-HC
     "GitHub.GitHubDesktop", # GitHub Desktop
     "Google.Drive", # Google Drive for desktop
     "Henry++.simplewall", # simplewall
     "JetBrains.Toolbox", # JetBrains Toolbox
-    "Microsoft.DirectX" # DirectX End-User Runtime Web Installer
+    "Microsoft.DirectX", # DirectX End-User Runtime Web Installer
     "Microsoft.DotNet.DesktopRuntime.7", # Microsoft .NET Windows Desktop Runtime 7.0
     "Microsoft.VCRedist.2005.x64", # Microsoft Visual C++ 2005 Redistributable (x64)
     "Microsoft.VCRedist.2005.x86", # Microsoft Visual C++ 2005 Redistributable (x86)
@@ -104,7 +97,7 @@ ForEach ($WingetID in $WingetList) {
     winget install --id $WingetID -e --accept-source-agreements --accept-package-agreements
     "`n"
 }
-
+    
 # Scoop AppList
 $ScoopList = @(
     # Checkup Dependency
@@ -115,29 +108,31 @@ $ScoopList = @(
     "adb", # Android SDK platform-tools
     "aria2", # Aria2
     "deew", # Dolby Encoding Engine Wrapper
+    "dovi-tool", # dovi_tool
     "drivedlgo", #Drive-Dl-Go
     "fancontrol", # Fan Control
     "ffmpeg-nightly", # FFmpeg Master BtbN builds
-    "freetube", # FreeTube
+    "gclone", # gclone
     "gMKVExtractGUI", # gMKVExtractGUI
     "gpac", # MP4Box
-    "imageglass", # ImageGlass
+    "hdr10plus-tool", # hdr10plus_tool
     "jdownloader", # JDownloader
-    "keepass" # KeePass Password Safe
+    "keepass", # KeePass Password Safe
     "MakeMKV", # MakeMKV
-    "mediainfo", # MediaInfo-CLI
     "mediainfo-gui", # MediaInfo-GUI
-    "MKVmergeBatcher", # MKVmergeBatcher
+    "mkvmergebatcher", # MKVmergeBatcher
     "mkvtoolnix", # MKVToolNix
-    "mpc-hc-fork", # 
+    "mpc-hc-fork", # MPC-HC
+    "mpc-video-renderer" # MPC Video Renderer
     "picocrypt", # Picocrypt
-    "qaac", # CLI QuickTime AAC/ALAC encoder
-    "rclone" # Rclone
+    "qaac", # QuickTime AAC/ALAC encoder
+    "rclone", # Rclone
     "rclone-browser", # RcloneBrowser
     "sox", # SoX - Sound eXchange
+    "spek-beta", # Spek
     "staxrip", # Staxrip
     "subtitleedit", # Subtitle Edit
-    "temurin8-jre" # Java OpenJDK
+    "temurin8-jre", # Java OpenJDK
     "tor-browser", # Tor Browser
     "winmerge", # WinMerge
     "yt-dlp" # YT-DLP
@@ -154,7 +149,7 @@ ForEach ($ScoopID in $ScoopList) {
 
 # Refreshing Environment Variables
 Write-Host "Refreshing Environment Variables..." -ForegroundColor Yellow
-$Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$Env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # Updating Pip
 Write-Host "Updating Pip..." -ForegroundColor Yellow
@@ -164,6 +159,7 @@ python -m pip install --upgrade pip
 # Pip AppList
 $PipList = @(
     "tldr" # tldr-pages
+    "plotbitrate" # PlotBitrate
     #"ffsubsync", # FFsubsync
 )
 ForEach ($PipID in $PipList) {
@@ -176,27 +172,18 @@ ForEach ($PipID in $PipList) {
 
 # Visual Studio Code extensions list
 $VSCEList = @(
-    "aaron-bond.better-comments" # Better Comments
-    "DavidAnson.vscode-markdownlint" # markdownlint
-    "eamodio.gitlens" # GitLens — Git supercharged
-    "EditorConfig.EditorConfig" # EditorConfig for VS Code
-    "esbenp.prettier-vscode" # Prettier - Code formatter
-    "formulahendry.code-runner" # Code Runner
-    "GitHub.github-vscode-theme" # GitHub Theme
-    "MichaelZhou.fleet-theme" # Jetbrains Fleet Theme
-    "ms-python.python" # Python
-    "ms-python.vscode-pylance" # Pylance
-    "ms-toolsai.jupyter" # Jupyter
-    "ms-toolsai.jupyter-keymap" # Jupyter Keymap
-    "ms-toolsai.jupyter-renderers" # Jupyter Notebook Renderers
-    "ms-toolsai.vscode-jupyter-cell-tags" # Jupyter Call Tags
-    "ms-toolsai.vscode-jupyter-slideshow" # Jupyter Slide Show
-    "ms-vscode-remote.remote-wsl" # WSL
-    "ms-vscode.cpptools" # C/C++
-    "ms-vscode.powershell" # Powershell
-    "ShayanAhmedKhan.fleet-color-theme" # Fleet Color Theme
+    "aaron-bond.better-comments", # Better Comments
+    "DavidAnson.vscode-markdownlint", # markdownlint
+    "EditorConfig.EditorConfig", # EditorConfig for VS Code
+    "ms-python.python", # Python
+    "ms-vscode-remote.remote-wsl", # WSL
+    "ms-vscode.cpptools", # C/C++
+    "ms-vscode.powershell", # Powershell
+    "PKief.material-icon-theme", # Material Icon Theme
+    "redhat.vscode-xml", # Red Hat XML
+    "redhat.vscode-yaml", # Red Hat YAML
+    "ShayanAhmedKhan.fleet-color-theme", # Fleet Color Theme
     "streetsidesoftware.code-spell-checker" # Code Spell Checker
-    "vscode-icons-team.vscode-icons" # vscode-icons
 )
 ForEach ($VSCEID in $VSCEList) {
     Write-Host "--------------------------------------------------------------" -ForegroundColor DarkGray
@@ -210,8 +197,8 @@ ForEach ($VSCEID in $VSCEList) {
 Write-Host "Updating App if found / Check for potential problems and Cleaning Up..." -ForegroundColor Yellow
 winget upgrade -i -r
 scoop update -k -q -a
-scoop checkup *
 scoop cleanup -a -k
+scoop checkup *
 "`n"
 
 Write-Host "`nDone." -ForegroundColor Green

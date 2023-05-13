@@ -32,19 +32,13 @@ $List = @(
     "Microsoft.GamingApp_8wekyb3d8bbwe", # Xbox
     "Microsoft.GetHelp_8wekyb3d8bbwe", # Get Help
     "Microsoft.Getstarted_8wekyb3d8bbwe", # Microsoft Tips
-    "Microsoft.HEIFImageExtension_8wekyb3d8bbwe", # HEIF Image Extensions
     "Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe", # Office
     "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe", # Solitaire & Casual Games
     "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe", # Microsoft Sticky Notes
     "Microsoft.OneDrive", # Microsoft OneDrive
     "Microsoft.People_8wekyb3d8bbwe", # Microsoft People
     "Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe", # Power Automate
-    "Microsoft.RawImageExtension_8wekyb3d8bbwe", # Raw Image Extension
-    "Microsoft.Todos_8wekyb3d8bbwe", # Microsoft To Do
     "Microsoft.VP9VideoExtensions_8wekyb3d8bbwe" # VP9 Video Extensions
-    "Microsoft.WebMediaExtensions_8wekyb3d8bbwe" # Web Media Extensions
-    "Microsoft.WebpImageExtension_8wekyb3d8bbwe" # Webp Image Extensions
-    "Microsoft.Windows.Photos_8wekyb3d8bbwe" # Microsoft Photos
     "Microsoft.WindowsCamera_8wekyb3d8bbwe", # Windows Camera
     "microsoft.windowscommunicationsapps_8wekyb3d8bbwe", # Mail and Calendar
     "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe", # Feedback Hub
@@ -62,6 +56,12 @@ $List = @(
     "MicrosoftTeams_8wekyb3d8bbwe", # Microsoft Teams
     "MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy", # Windows Web Experience Pack
     "{462f63a8-6347-4894-a1b3-dbfe3a4c981d}" # Microsoft Visual C++ 2015 Redistributable (x86)
+    "Microsoft.WebMediaExtensions_8wekyb3d8bbwe" # Web Media Extensions
+    #"Microsoft.RawImageExtension_8wekyb3d8bbwe", # Raw Image Extension
+    #"Microsoft.HEIFImageExtension_8wekyb3d8bbwe", # HEIF Image Extensions
+    #"Microsoft.WebpImageExtension_8wekyb3d8bbwe" # Webp Image Extensions
+    #"Microsoft.Windows.Photos_8wekyb3d8bbwe" # Microsoft Photos
+    #"Microsoft.Todos_8wekyb3d8bbwe", # Microsoft To Do
 )
 ForEach ($AppID in $List) {
     Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
