@@ -1,0 +1,62 @@
+{
+  // * Editor
+  // Control the cursor animation style.
+  "editor.cursorBlinking": "phase",
+  // Controls whether the smooth caret animation should be enabled.
+  "editor.cursorSmoothCaretAnimation": "on",
+  // Defines a default formatter which takes precedence over all other formatter settings. Must be the identifier of an extension contributing a formatter.
+  "[css][scss][less]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript][javascriptreact][typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json][jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "vscode.php-language-features"
+  },
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  // Controls the font family.
+  "editor.fontFamily": "'JetBrains Mono Light', 'Inter', 'Noto Color Emoji', 'Terminus', 'DejaVu Math TeX Gyre', 'DejaVu Sans', 'DejaVu Sans Light', 'DejaVu Sans Condensed', 'DejaVu Sans Mono', 'DejaVu Serif', 'DejaVu Serif Condensed'",
+  // Configures font ligatures or font features. Can be either a boolean to enable/disable ligatures or a string for the value of the CSS 'font-feature-settings' property.
+  "editor.fontLigatures": true,
+  // Controls the font size in pixels.
+  "editor.fontSize": 13,
+  // Format a file on save. A formatter must be available, the file must not be saved after delay, and the editor must not be shutting down.
+  "editor.formatOnSave": true,
+  // Controls the line height. 
+  "editor.lineHeight": 1.7,
+  // Controls how lines should wrap.
+  "editor.wordWrap": "on",
+  // * Workbench
+  // Specifies the color theme used in the workbench.
+  "workbench.colorTheme": "Fleet Dark",
+  // Specifies the file icon theme used in the workbench or 'null' to not show any file icons.
+  "workbench.iconTheme": "material-icon-theme",
+  // * Extension settings
+  // Better Comments
+  "better-comments.highlightPlainText": true,
+  // Powershell
+  "powershell.analyzeOpenDocumentsOnly": true,
+  "powershell.integratedConsole.suppressStartupBanner": true,
+  "powershell.integratedConsole.showOnStartup": false
+}
