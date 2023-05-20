@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "141",
+  "__VERSION__": "157",
   "Main": {
     "Controls": [
       {
@@ -57,9 +57,11 @@
         "SelectedCommandStepDown": 3.0,
         "SelectedCommandStepUp": 8.0,
         "SelectedFanCurve": {
+          "IsHidden": false,
           "Name": "Mix",
           "SelectedFanCurves": [
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "GPU",
@@ -82,6 +84,7 @@
               }
             },
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "CPU",
@@ -184,9 +187,11 @@
         "SelectedCommandStepDown": 8.0,
         "SelectedCommandStepUp": 8.0,
         "SelectedFanCurve": {
+          "IsHidden": false,
           "Name": "Mix",
           "SelectedFanCurves": [
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "GPU",
@@ -209,6 +214,7 @@
               }
             },
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "CPU",
@@ -257,9 +263,11 @@
         "SelectedCommandStepDown": 3.0,
         "SelectedCommandStepUp": 8.0,
         "SelectedFanCurve": {
+          "IsHidden": false,
           "Name": "Mix",
           "SelectedFanCurves": [
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "GPU",
@@ -282,6 +290,7 @@
               }
             },
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "CPU",
@@ -330,9 +339,11 @@
         "SelectedCommandStepDown": 3.0,
         "SelectedCommandStepUp": 8.0,
         "SelectedFanCurve": {
+          "IsHidden": false,
           "Name": "Mix",
           "SelectedFanCurves": [
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "GPU",
@@ -355,6 +366,7 @@
               }
             },
             {
+              "IsHidden": false,
               "MaximumTemperature": 80,
               "MinimumTemperature": 20,
               "Name": "CPU",
@@ -388,6 +400,7 @@
     "CustomSensors": [],
     "FanCurves": [
       {
+        "IsHidden": false,
         "MaximumTemperature": 80,
         "MinimumTemperature": 20,
         "Name": "GPU",
@@ -410,6 +423,7 @@
         }
       },
       {
+        "IsHidden": false,
         "MaximumTemperature": 80,
         "MinimumTemperature": 20,
         "Name": "CPU",
@@ -433,9 +447,11 @@
         }
       },
       {
+        "IsHidden": false,
         "Name": "Mix",
         "SelectedFanCurves": [
           {
+            "IsHidden": false,
             "MaximumTemperature": 80,
             "MinimumTemperature": 20,
             "Name": "GPU",
@@ -458,6 +474,7 @@
             }
           },
           {
+            "IsHidden": false,
             "MaximumTemperature": 80,
             "MinimumTemperature": 20,
             "Name": "CPU",
@@ -542,14 +559,14 @@
     ],
     "HideFanSpeedCards": false,
     "HorizontalUIOrientation": false,
-    "PrimaryColor": "#FFC8C8C8",
-    "SecondaryColor": "#FFFFFFFF",
+    "PrimaryColor": "#FF607D8B",
+    "SecondaryColor": "#FFAEEA00",
     "SelectedTheme": "Light",
-    "SelectedTrayIconColor": "Dark",
     "ShowHiddenCards": false,
     "StartMinimized": false,
-    "SyncThemeWithWindows": false,
+    "SyncThemeWithWindows": true,
     "TemperatureSensors": [],
+    "TrayIconColor": "#FF000000",
     "TrayIcons": []
   },
   "Sensors": {
@@ -558,7 +575,9 @@
     "LibreHardwareMonitorSettings": {
       "Controller": true,
       "CPU": true,
+      "EmbeddedEC": true,
       "GPU": true,
+      "InpOut": false,
       "Memory": true,
       "Motherboard": true,
       "PSU": true,
