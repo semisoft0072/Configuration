@@ -55,7 +55,9 @@ $WingetList = @(
     "9MZ1SNWT0N5D", # PowerShell
     "9NRWMJP3717K", # Python 3.11
     "9NCBCSZSJRSB", # Spotify
+    "9NZTWSQNTD0S", # Telegram Desktop
     "XP9KHM4BK9FZ7Q", # Visual Studio Code
+    "XPDP2QW12DFSFK", # Ubisoft Connect - PC
     "9NKSQGP7F2NH", # WhatsApp
     "9MSVKQC78PK6", # WSL Debian
     # Apps , Dependency
@@ -80,13 +82,11 @@ $WingetList = @(
     "Microsoft.VCRedist.2015+.x86", # Microsoft Visual C++ 2015-2022 Redistributable (x86)
     "namazso.OpenHashTab", # OpenHashTab
     "Nextcloud.NextcloudDesktop", # Nextcloud
-    "Notion.Notion", # Notion
     "Nvidia.GeForceExperience", # NVIDIA GeForce Experience
     "Obsidian.Obsidian", # Obsidian
     "Oracle.VirtualBox", # Oracle VM VirtualBox
     "ProtonTechnologies.ProtonVPN", # ProtonVPN
     "qBittorrent.qBittorrent", # qBittorrent
-    "Telegram.TelegramDesktop", # Telegram Desktop
     "Valve.Steam", # Steam
     "voidtools.Everything" # Everything
 )
@@ -105,22 +105,18 @@ $ScoopList = @(
     "innounp", # Inno Setup Unpacker
     "wixtoolset", # WiX Toolset
     # Apps
-    "adb", # Android SDK platform-tools
     "aria2", # Aria2
     "deew", # Dolby Encoding Engine Wrapper
-    "dovi-tool", # dovi_tool
     "drivedlgo", #Drive-Dl-Go
     "fancontrol", # Fan Control
     "ffmpeg-nightly", # FFmpeg Master BtbN builds
     "gclone", # gclone
     "gMKVExtractGUI", # gMKVExtractGUI
     "gpac", # MP4Box
-    "hdr10plus-tool", # hdr10plus_tool
     "jdownloader", # JDownloader
     "keepass", # KeePass Password Safe
     "MakeMKV", # MakeMKV
     "mediainfo-gui", # MediaInfo-GUI
-    "mkvmergebatcher", # MKVmergeBatcher
     "mkvtoolnix", # MKVToolNix
     "mpc-hc-fork", # MPC-HC
     "mpc-video-renderer" # MPC Video Renderer
@@ -136,6 +132,7 @@ $ScoopList = @(
     "tor-browser", # Tor Browser
     "winmerge", # WinMerge
     "yt-dlp" # YT-DLP
+    #"adb", # Android SDK platform-tools
     #"freac", # fre:ac - free audio converter
     #"hakuneko", # HakuNeko Desktop
 )
@@ -159,7 +156,7 @@ python -m pip install --upgrade pip
 # Pip AppList
 $PipList = @(
     "tldr" # tldr-pages
-    "plotbitrate" # PlotBitrate
+    #"plotbitrate" # PlotBitrate
     #"ffsubsync", # FFsubsync
 )
 ForEach ($PipID in $PipList) {
