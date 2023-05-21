@@ -57,9 +57,9 @@ $WingetList = @(
     "9NCBCSZSJRSB", # Spotify
     "9NZTWSQNTD0S", # Telegram Desktop
     "XP9KHM4BK9FZ7Q", # Visual Studio Code
-    "XPDP2QW12DFSFK", # Ubisoft Connect - PC
     "9NKSQGP7F2NH", # WhatsApp
     "9MSVKQC78PK6", # WSL Debian
+    #"XPDP2QW12DFSFK", # Ubisoft Connect - PC
     # Apps , Dependency
     "Cloudflare.Warp", # Cloudflare WARP
     "GitHub.GitHubDesktop", # GitHub Desktop
