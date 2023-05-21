@@ -67,7 +67,7 @@ ForEach ($AppID in $List) {
     Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
     Write-Host "winget uninstall --id $AppID -e"                                     -ForegroundColor Gray
     Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
-    winget uninstall --id $AppID -e --force --purge --accept-source-agreements --accept-package-agreements
+    winget uninstall --id $AppID -e --force --purge --accept-source-agreements
     "`n"
 }
 
