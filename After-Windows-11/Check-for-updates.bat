@@ -2,7 +2,7 @@
 Title Check for apps updates
 
 :: Winget
-powershell -command "winget upgrade -i -r"
+powershell -command "winget upgrade -i -r -u"
 
 :: Scoop
 powershell -command "scoop update -k -q -a"

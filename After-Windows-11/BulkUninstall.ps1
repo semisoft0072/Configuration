@@ -6,7 +6,7 @@
 .NOTES
     This is my personal preference. so be sure to change before run this script.
     Place the "#" char before function if you don't want to run it
-    Tested on 'Windows 11 Enterprise'
+    Tested on 'Windows 11'
 .LINK
     https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
 #>
@@ -23,6 +23,11 @@ if (-not $IsAdmin) {
 $Host.UI.RawUI.WindowTitle = "BulkUninstall"
 Write-Host "This is my personal preference. so be sure to change before run this script." -ForegroundColor Red
 Read-Host -Prompt "Press any key to start"
+"`n"
+
+Write-Host "Accepting source agreements..." -ForegroundColor Yellow
+winget uninstall --id --force --accept-source-agreements | out-null
+"`n"
 
 # Pre-installed apps list
 $List = @(
@@ -48,7 +53,6 @@ $List = @(
     "Microsoft.ZuneMusic_8wekyb3d8bbwe", # Windows Media Player
     "Microsoft.ZuneVideo_8wekyb3d8bbwe", # Movies & TV
     "MicrosoftCorporationII.QuickAssist_8wekyb3d8bbwe", # Quick Assist
-    "MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy", # Windows Web Experience Pack
     "{462f63a8-6347-4894-a1b3-dbfe3a4c981d}" # Microsoft Visual C++ 2015 Redistributable (x86)
     #"Microsoft.GamingApp_8wekyb3d8bbwe", # Xbox
     #"Microsoft.HEIFImageExtension_8wekyb3d8bbwe", # HEIF Image Extensions
@@ -62,6 +66,7 @@ $List = @(
     #"Microsoft.XboxIdentityProvider_8wekyb3d8bbwe", # Xbox Identity Provider
     #"Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe", # Xbox Game Speech Window
     #"MicrosoftTeams_8wekyb3d8bbwe", # Microsoft Teams
+    #"MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy", # Windows Web Experience Pack
 )
 ForEach ($AppID in $List) {
     Write-Host "-------------------------------------------------------------------" -ForegroundColor DarkGray
@@ -71,5 +76,5 @@ ForEach ($AppID in $List) {
     "`n"
 }
 
-Write-Host "`nDone." -ForegroundColor Green
+Write-Host "Done." -ForegroundColor Green
 Read-Host -Prompt "Press any key to Exit"

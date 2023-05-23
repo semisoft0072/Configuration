@@ -6,7 +6,7 @@
 .NOTES
     This is my personal preference. so be sure to change before run this script.
     Place the "#" char before function if you don't want to run it
-    Tested on 'Windows 11 Enterprise'
+    Tested on 'Windows 11'
 .LINK
     https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
     https://www.elevenforum.com/
@@ -19,7 +19,7 @@
 # Check if the script is running as administrator
 $IsAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if (-not $IsAdmin) {
-# Restart the script with administrator privileges
+    # Restart the script with administrator privileges
     Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$($MyInvocation.InvocationName)`"" -Verb RunAs
     exit
 }
@@ -221,8 +221,8 @@ Write-Output "Let apps access diagnostic info about your other apps set to 'Off'
 # * Others
 # Stop F1 Key from Opening Help
 Write-Host "Disabling 'F1' Key from Opening Help"
-if((Test-Path -LiteralPath "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32") -ne $true) {  New-Item "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32" -force };
-if((Test-Path -LiteralPath "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64") -ne $true) {  New-Item "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64" -force };
+if ((Test-Path -LiteralPath "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32") -ne $true) { New-Item "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32" -force };
+if ((Test-Path -LiteralPath "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64") -ne $true) { New-Item "HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64" -force };
 New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win32' -Name '(default)' -Value '' -PropertyType String -Force | Out-Null
 New-ItemProperty -LiteralPath 'HKCU:\SOFTWARE\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}\1.0\0\win64' -Name '(default)' -Value '' -PropertyType String -Force | Out-Null
 # TODO: More Staff add soon
@@ -259,7 +259,8 @@ Write-Host "Adding Check-for-updates.bat to Startup..." -ForegroundColor Yellow
 if (!(Test-Path C:\bin)) {
     New-Item -ItemType Directory -Path C:\bin | Out-Null
     Write-Host "Folder created successfully."
-} else {
+}
+else {
     Write-Host "Folder already exists: C:\bin"
 }
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/semisoft0072/Configuration/main/After-Windows-11/Check-for-updates.bat" -OutFile "C:\bin\Check-for-updates.bat"

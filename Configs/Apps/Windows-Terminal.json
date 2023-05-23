@@ -37,7 +37,7 @@
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "initialCols": 190,
     "initialPosition": ",",
-    "initialRows": 42,
+    "initialRows": 44,
     "launchMode": "focus",
     "minimizeToNotificationArea": false,
     "profiles": 
@@ -46,16 +46,16 @@
         {
             "adjustIndistinguishableColors": "always",
             "antialiasingMode": "grayscale",
-            "colorScheme": "Campbell",
+            "colorScheme": "GitHub Dark",
             "experimental.retroTerminalEffect": false,
             "font": 
             {
-                "face": "Roboto Mono",
+                "face": "JetBrains Mono",
                 "size": 13.0,
                 "weight": "normal"
             },
             "intenseTextStyle": "all",
-            "opacity": 75,
+            "opacity": 100,
             "padding": "8",
             "scrollbarState": "hidden",
             "useAcrylic": true,
@@ -65,9 +65,8 @@
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nologo",
-                "elevate": false,
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": true,
+                "hidden": false,
                 "name": "Windows PowerShell"
             },
             {
@@ -77,9 +76,9 @@
                 "name": "Command Prompt"
             },
             {
-                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -nologo",
+                "commandline": "\"C:\\Users\\White\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\" -nologo",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": true,
+                "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore"
             },
@@ -90,27 +89,10 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "altGrAliasing": true,
-                "antialiasingMode": "grayscale",
-                "closeOnExit": "automatic",
-                "colorScheme": "Campbell",
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nologo",
-                "cursorShape": "bar",
-                "elevate": true,
-                "font": 
-                {
-                    "face": "Cascadia Mono",
-                    "size": 12.0
-                },
-                "guid": "{6c62651c-1d13-4a61-a6ae-632fd718ae73}",
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
-                "historySize": 9001,
-                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
-                "name": "Windows PowerShell (Admin)",
-                "padding": "8, 8, 8, 8",
-                "snapOnInput": true,
-                "startingDirectory": "%USERPROFILE%",
-                "useAcrylic": false
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
             }
         ]
     },
@@ -163,27 +145,27 @@
             "yellow": "#C19C00"
         },
         {
-            "background": "#282A36",
-            "black": "#21222C",
-            "blue": "#BD93F9",
-            "brightBlack": "#6272A4",
-            "brightBlue": "#D6ACFF",
-            "brightCyan": "#A4FFFF",
-            "brightGreen": "#69FF94",
-            "brightPurple": "#FF92DF",
-            "brightRed": "#FF6E6E",
+            "background": "#101216",
+            "black": "#000000",
+            "blue": "#6CA4F8",
+            "brightBlack": "#4D4D4D",
+            "brightBlue": "#6CA4F8",
+            "brightCyan": "#2B7489",
+            "brightGreen": "#56D364",
+            "brightPurple": "#DB61A2",
+            "brightRed": "#F78166",
             "brightWhite": "#FFFFFF",
-            "brightYellow": "#FFFFA5",
-            "cursorColor": "#F8F8F2",
-            "cyan": "#8BE9FD",
-            "foreground": "#F8F8F2",
-            "green": "#50FA7B",
-            "name": "Dracula",
-            "purple": "#FF79C6",
-            "red": "#FF5555",
-            "selectionBackground": "#44475A",
-            "white": "#F8F8F2",
-            "yellow": "#F1FA8C"
+            "brightYellow": "#E3B341",
+            "cursorColor": "#C9D1D9",
+            "cyan": "#2B7489",
+            "foreground": "#8B949E",
+            "green": "#56D364",
+            "name": "GitHub Dark",
+            "purple": "#DB61A2",
+            "red": "#F78166",
+            "selectionBackground": "#3B5070",
+            "white": "#FFFFFF",
+            "yellow": "#E3B341"
         },
         {
             "background": "#282C34",
@@ -345,29 +327,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#C0C0C0",
             "yellow": "#808000"
-        },
-        {
-            "background": "#2E3440",
-            "black": "#3B4252",
-            "blue": "#81A1C1",
-            "brightBlack": "#4C566A",
-            "brightBlue": "#81A1C1",
-            "brightCyan": "#8FBCBB",
-            "brightGreen": "#A3BE8C",
-            "brightPurple": "#B48EAD",
-            "brightRed": "#BF616A",
-            "brightWhite": "#ECEFF4",
-            "brightYellow": "#EBCB8B",
-            "cursorColor": "#ECEFF4",
-            "cyan": "#88C0D0",
-            "foreground": "#D8DEE9",
-            "green": "#A3BE8C",
-            "name": "nord",
-            "purple": "#B48EAD",
-            "red": "#BF616A",
-            "selectionBackground": "#ECEFF4",
-            "white": "#E5E9F0",
-            "yellow": "#EBCB8B"
         }
     ],
     "tabWidthMode": "titleLength",

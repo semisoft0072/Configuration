@@ -6,7 +6,7 @@
 .NOTES
     This is my personal preference. so be sure to change before run this script.
     Place the "#" char before function if you don't want to run it
-    Tested on 'Windows 11 Enterprise'
+    Tested on 'Windows 11'
 .LINK
     https://github.com/semisoft0072/Configuration/tree/main/After-Windows-11
 #>
@@ -16,55 +16,49 @@ $Host.UI.RawUI.WindowTitle = "BulkInstall"
 Write-Host "This is my personal preference. so be sure to change before run this script." -ForegroundColor Red
 Read-Host -Prompt "Press any key to start"
 
-# Updating Source Winget
+Write-Host "Installing scoop package manager..." -ForegroundColor Yellow
+irm get.scoop.sh | iex
+"`n"
+Write-Host "Accepting source agreements..." -ForegroundColor Yellow
+winget install --id --force --accept-source-agreements --accept-package-agreements | out-null
+"`n"
 Write-Host "Updating winget..." -ForegroundColor Yellow
 winget source update
-# Updating Scoop
-Write-Host "Updating Scoop..." -ForegroundColor Yellow
-# Scoop uses Git to update itself.
-scoop install git
-# Scoop uses aria2c for multi-connection downloads.
-scoop install aria2
-# To disable aria2 warning
-scoop config aria2-warning-enabled false
-# Update apps, or Scoop itself
+Write-Host "Updating scoop..." -ForegroundColor Yellow
+scoop install git -k -a 64bit # scoop uses Git to update itself.
+scoop install aria2 -k -a 64bit # scoop uses aria2c for multi-connection downloads.
+scoop config aria2-warning-enabled false # To disable aria2 warning
+scoop config show_update_log false # Do not show changed commits on 'scoop update'
 scoop update
-# Updating Adding Scoop Buckets
 "`n"
-Write-Host "Adding Buckets..." -ForegroundColor Yellow `n
+Write-Host "Adding Buckets..." -ForegroundColor Yellow
 scoop bucket add extras
-scoop bucket add versions
-scoop bucket add nerd-fonts
 scoop bucket add java
+scoop bucket add versions
 scoop bucket add missing-apps https://github.com/semisoft0072/scoop-apps
 "`n"
 
 # Winget AppList
 $WingetList = @(
     # Microsoft Store Apps
-    "9PFHDD62MXS1", # Apple Music Preview
-    "9PJSDV0VPK04", # Bitwarden
-    "9PGCV4V3BK4W", # DevToys
-    "XPDC2RH70K22MN", # Discord
-    "XP99VR1BPSBQJ2", # Epic Games Launcher
-    "9WZDNCRF0083", # Facebook Messenger
-    "XP89DCGQ3K6VLD", # Microsoft PowerToys
-    "9NVMNJCR03XV", # MSI Center
-    "9N8G7TSCL18R", # NanaZip
-    "9NF8H0H7WMLT", # NVIDIA Control Panel
-    "9MZ1SNWT0N5D", # PowerShell
-    "9NRWMJP3717K", # Python 3.11
-    "9NCBCSZSJRSB", # Spotify
-    "9NZTWSQNTD0S", # Telegram Desktop
-    "XP9KHM4BK9FZ7Q", # Visual Studio Code
-    "9NKSQGP7F2NH", # WhatsApp
     "9MSVKQC78PK6", # WSL Debian
-    #"XPDP2QW12DFSFK", # Ubisoft Connect - PC
+    "9MZ1SNWT0N5D", # PowerShell
+    "9N8G7TSCL18R", # NanaZip
+    "9NCBCSZSJRSB", # Spotify
+    "9NKSQGP7F2NH", # WhatsApp
+    "9NRWMJP3717K", # Python 3.11
+    "9NZTWSQNTD0S", # Telegram Desktop
+    "9PFHDD62MXS1", # Apple Music Preview
+    "9PGCV4V3BK4W", # DevToys
+    "9PJSDV0VPK04", # Bitwarden
+    "9WZDNCRF0083", # Facebook Messenger
+    "XP9KHM4BK9FZ7Q", # Visual Studio Code
+    "XP89DCGQ3K6VLD", # Microsoft PowerToys
+    "XP99VR1BPSBQJ2", # Epic Games Launcher
+    "XPDC2RH70K22MN", # Discord
     # Apps , Dependency
     "Cloudflare.Warp", # Cloudflare WARP
     "GitHub.GitHubDesktop", # GitHub Desktop
-    "Google.Drive", # Google Drive for desktop
-    "Henry++.simplewall", # simplewall
     "JetBrains.Toolbox", # JetBrains Toolbox
     "Microsoft.DirectX", # DirectX End-User Runtime Web Installer
     "Microsoft.DotNet.DesktopRuntime.7", # Microsoft .NET Windows Desktop Runtime 7.0
@@ -84,30 +78,28 @@ $WingetList = @(
     "Nextcloud.NextcloudDesktop", # Nextcloud
     "Nvidia.GeForceExperience", # NVIDIA GeForce Experience
     "Obsidian.Obsidian", # Obsidian
-    "Oracle.VirtualBox", # Oracle VM VirtualBox
-    "ProtonTechnologies.ProtonVPN", # ProtonVPN
     "qBittorrent.qBittorrent", # qBittorrent
-    "Valve.Steam", # Steam
-    "voidtools.Everything" # Everything
+    "Valve.Steam" # Steam
 )
 ForEach ($WingetID in $WingetList) {
     Write-Host "--------------------------------------------------------" -ForegroundColor DarkGray
-    Write-Host "winget install --id $WingetID -e"                         -ForegroundColor Gray
+    Write-Host "winget install --id $WingetID"                            -ForegroundColor Gray
     Write-Host "--------------------------------------------------------" -ForegroundColor DarkGray
     winget install --id $WingetID -e --accept-source-agreements --accept-package-agreements
     "`n"
 }
     
-# Scoop AppList
-$ScoopList = @(
+# scoop AppList
+$scoopList = @(
     # Checkup Dependency
-    "dark", # WiX (Windows Installer XML) Toolset Decompiler
     "innounp", # Inno Setup Unpacker
     "wixtoolset", # WiX Toolset
+    #"dark", # WiX (Windows Installer XML) Toolset Decompiler
     # Apps
     "aria2", # Aria2
     "deew", # Dolby Encoding Engine Wrapper
     "drivedlgo", #Drive-Dl-Go
+    "everything", # Everything
     "fancontrol", # Fan Control
     "ffmpeg-nightly", # FFmpeg Master BtbN builds
     "gclone", # gclone
@@ -119,11 +111,12 @@ $ScoopList = @(
     "mediainfo-gui", # MediaInfo-GUI
     "mkvtoolnix", # MKVToolNix
     "mpc-hc-fork", # MPC-HC
-    "mpc-video-renderer" # MPC Video Renderer
+    "mpc-video-renderer", # MPC Video Renderer
     "picocrypt", # Picocrypt
     "qaac", # QuickTime AAC/ALAC encoder
     "rclone", # Rclone
     "rclone-browser", # RcloneBrowser
+    "simplewall", # simplewall
     "sox", # SoX - Sound eXchange
     "spek-beta", # Spek
     "staxrip", # Staxrip
@@ -136,11 +129,11 @@ $ScoopList = @(
     #"freac", # fre:ac - free audio converter
     #"hakuneko", # HakuNeko Desktop
 )
-ForEach ($ScoopID in $ScoopList) {
+ForEach ($scoopID in $ScoopList) {
     Write-Host "-----------------------------" -ForegroundColor DarkGray
-    Write-Host "scoop install $ScoopID"        -ForegroundColor Gray
+    Write-Host "scoop install $scoopID"        -ForegroundColor Gray
     Write-Host "-----------------------------" -ForegroundColor DarkGray
-    scoop install $ScoopID
+    scoop install $scoopID -k -a 64bit
     "`n"
 }
 
@@ -192,11 +185,11 @@ ForEach ($VSCEID in $VSCEList) {
 
 # Updating All Apps if found / Check for potential problems and Cleaning Up
 Write-Host "Updating App if found / Check for potential problems and Cleaning Up..." -ForegroundColor Yellow
-winget upgrade -i -r
+winget upgrade -i -r -u
 scoop update -k -q -a
 scoop cleanup -a -k
 scoop checkup *
 "`n"
 
-Write-Host "`nDone." -ForegroundColor Green
+Write-Host "Done." -ForegroundColor Green
 Read-Host -Prompt "Press any key to Exit"
