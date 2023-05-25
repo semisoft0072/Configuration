@@ -17,7 +17,7 @@ Write-Host "This is my personal preference. so be sure to change before run this
 Read-Host -Prompt "Press any key to start"
 
 Write-Host "Installing scoop package manager..." -ForegroundColor Yellow
-irm get.scoop.sh | iex
+Invoke-RestMethod get.scoop.sh | Invoke-Expression
 "`n"
 Write-Host "Accepting source agreements..." -ForegroundColor Yellow
 winget install --id --force --accept-source-agreements --accept-package-agreements | out-null
