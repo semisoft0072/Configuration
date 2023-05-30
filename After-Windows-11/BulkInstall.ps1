@@ -187,8 +187,9 @@ ForEach ($VSCEID in $VSCEList) {
 Write-Host "Updating App if found / Check for potential problems and Cleaning Up..." -ForegroundColor Yellow
 winget upgrade -i -r -u
 scoop update -k -q -a
-scoop cleanup -a -k
-scoop checkup *
+scoop cache rm -a # Remove downloads caches
+scoop cleanup -a -k # Cleans Scoop apps by removing old versions.
+scoop checkup * # Performs a series of diagnostic tests to try to identify things that may cause problems with Scoop.
 "`n"
 
 Write-Host "Done." -ForegroundColor Green
