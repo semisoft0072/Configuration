@@ -33,7 +33,6 @@ scoop update
 "`n"
 Write-Host "Adding Buckets..." -ForegroundColor Yellow
 scoop bucket add extras
-scoop bucket add java
 scoop bucket add versions
 scoop bucket add missing-apps https://github.com/semisoft0072/scoop-apps
 "`n"
@@ -59,7 +58,6 @@ $WingetList = @(
     # Apps , Dependency
     "Cloudflare.Warp", # Cloudflare WARP
     "GitHub.GitHubDesktop", # GitHub Desktop
-    "JetBrains.Toolbox", # JetBrains Toolbox
     "Microsoft.DirectX", # DirectX End-User Runtime Web Installer
     "Microsoft.DotNet.DesktopRuntime.7", # Microsoft .NET Windows Desktop Runtime 7.0
     "Microsoft.VCRedist.2005.x64", # Microsoft Visual C++ 2005 Redistributable (x64)
@@ -94,7 +92,6 @@ $scoopList = @(
     # Checkup Dependency
     "innounp", # Inno Setup Unpacker
     "wixtoolset", # WiX Toolset
-    #"dark", # WiX (Windows Installer XML) Toolset Decompiler
     # Apps
     "aria2", # Aria2
     "deew", # Dolby Encoding Engine Wrapper
@@ -105,27 +102,19 @@ $scoopList = @(
     "gclone", # gclone
     "gMKVExtractGUI", # gMKVExtractGUI
     "gpac", # MP4Box
-    "jdownloader", # JDownloader
     "keepass", # KeePass Password Safe
     "MakeMKV", # MakeMKV
     "mediainfo-gui", # MediaInfo-GUI
     "mkvtoolnix", # MKVToolNix
-    "mpc-hc-fork", # MPC-HC
-    "mpc-video-renderer", # MPC Video Renderer
-    "picocrypt", # Picocrypt
+    "mpv-git", #mpv
     "qaac", # QuickTime AAC/ALAC encoder
     "rclone", # Rclone
     "rclone-browser", # RcloneBrowser
     "simplewall", # simplewall
-    "sox", # SoX - Sound eXchange
-    "spek-beta", # Spek
-    "staxrip", # Staxrip
     "subtitleedit", # Subtitle Edit
-    "temurin8-jre", # Java OpenJDK
     "tor-browser", # Tor Browser
     "winmerge", # WinMerge
     "yt-dlp" # YT-DLP
-    #"adb", # Android SDK platform-tools
     #"freac", # fre:ac - free audio converter
     #"hakuneko", # HakuNeko Desktop
 )

@@ -41,8 +41,6 @@ $List = @(
     "Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe", # Microsoft Sticky Notes
     "Microsoft.People_8wekyb3d8bbwe", # Microsoft People
     "Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe", # Power Automate
-    "Microsoft.VP9VideoExtensions_8wekyb3d8bbwe" # VP9 Video Extensions
-    "Microsoft.WebMediaExtensions_8wekyb3d8bbwe" # Web Media Extensions
     "Microsoft.WindowsCamera_8wekyb3d8bbwe", # Windows Camera
     "microsoft.windowscommunicationsapps_8wekyb3d8bbwe", # Mail and Calendar
     "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe", # Feedback Hub
@@ -51,7 +49,6 @@ $List = @(
     "Microsoft.YourPhone_8wekyb3d8bbwe" # Your Phone
     "Microsoft.YourPhone_8wekyb3d8bbwe", # Phone Link
     "Microsoft.ZuneMusic_8wekyb3d8bbwe", # Windows Media Player
-    "Microsoft.ZuneVideo_8wekyb3d8bbwe", # Movies & TV
     "MicrosoftCorporationII.QuickAssist_8wekyb3d8bbwe", # Quick Assist
     "{462f63a8-6347-4894-a1b3-dbfe3a4c981d}" # Microsoft Visual C++ 2015 Redistributable (x86)
     #"Microsoft.GamingApp_8wekyb3d8bbwe", # Xbox
@@ -59,12 +56,15 @@ $List = @(
     #"Microsoft.OneDrive", # Microsoft OneDrive
     #"Microsoft.RawImageExtension_8wekyb3d8bbwe", # Raw Image Extension
     #"Microsoft.Todos_8wekyb3d8bbwe", # Microsoft To Do
+    #"Microsoft.VP9VideoExtensions_8wekyb3d8bbwe" # VP9 Video Extensions
+    #"Microsoft.WebMediaExtensions_8wekyb3d8bbwe" # Web Media Extensions
     #"Microsoft.WebpImageExtension_8wekyb3d8bbwe" # Webp Image Extensions
     #"Microsoft.Windows.Photos_8wekyb3d8bbwe" # Microsoft Photos
     #"Microsoft.Xbox.TCUI_8wekyb3d8bbwe", #Xbox TCUI
     #"Microsoft.XboxGameOverlay_8wekyb3d8bbwe", # Xbox Game Bar Plugin
     #"Microsoft.XboxIdentityProvider_8wekyb3d8bbwe", # Xbox Identity Provider
     #"Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe", # Xbox Game Speech Window
+    #"Microsoft.ZuneVideo_8wekyb3d8bbwe", # Movies & TV
     #"MicrosoftTeams_8wekyb3d8bbwe", # Microsoft Teams
     #"MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy", # Windows Web Experience Pack
 )
