@@ -151,7 +151,6 @@ ForEach ($PipID in $PipList) {
 
 # Visual Studio Code extensions list
 $VSCEList = @(
-    "aaron-bond.better-comments", # Better Comments
     "DavidAnson.vscode-markdownlint", # markdownlint
     "EditorConfig.EditorConfig", # EditorConfig for VS Code
     "ms-python.python", # Python
