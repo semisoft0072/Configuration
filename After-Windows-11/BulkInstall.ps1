@@ -76,7 +76,6 @@ $WingetList = @(
     "Nextcloud.NextcloudDesktop", # Nextcloud
     "Nvidia.GeForceExperience", # NVIDIA GeForce Experience
     "Obsidian.Obsidian", # Obsidian
-    "qBittorrent.qBittorrent", # qBittorrent
     "Valve.Steam" # Steam
 )
 ForEach ($WingetID in $WingetList) {
@@ -95,7 +94,6 @@ $scoopList = @(
     # Apps
     "aria2", # Aria2
     "deew", # Dolby Encoding Engine Wrapper
-    "drivedlgo", #Drive-Dl-Go
     "everything", # Everything
     "fancontrol", # Fan Control
     "ffmpeg-nightly", # FFmpeg Master BtbN builds
@@ -106,7 +104,7 @@ $scoopList = @(
     "MakeMKV", # MakeMKV
     "mediainfo-gui", # MediaInfo-GUI
     "mkvtoolnix", # MKVToolNix
-    "mpv-git", #mpv
+    "mpv-git", # mpv
     "qaac", # QuickTime AAC/ALAC encoder
     "rclone", # Rclone
     "rclone-browser", # RcloneBrowser
